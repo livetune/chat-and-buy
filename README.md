@@ -2,7 +2,7 @@
 ``` bash
 # 克隆到本地
 git clone https://github.com/livetune/chat-and-buy.git
-cd chat-buy-react
+cd chat-and-buy
 
 # Mac 安装MongoDb (如果命令行因为网络问题安装不了，可以直接去 https://www.mongodb.com/download-center#community 下载
 brew install mongodb

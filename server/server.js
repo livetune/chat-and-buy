@@ -5,6 +5,7 @@ import logger from "koa-logger";
 import Router from "koa-router";
 import config from "./config";
 import jwtMiddleware from "./jwtMiddleware";
+import totalRouter from "./router";
 const router = Router();
 const app = new Koa();
 app.use(bodyParser());
@@ -19,9 +20,9 @@ router.get("/", (ctx, next) => {
   next();
 });
 
-require("./router")(router);
+totalRouter(router);
 const server = require("http").Server(app.callback());
-const io = global.io = require("socket.io")(server);
+const io = (global.io = require("socket.io")(server));
 require("./socket")(io);
 server.listen(config.PROT, function() {
   console.log("node start");
