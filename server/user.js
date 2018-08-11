@@ -2,7 +2,7 @@ import Model from "./model";
 import key from "./key";
 const userModel = Model.user;
 const jwt = require("jsonwebtoken");
-module.exports = function(router) {
+export default function(router) {
   router.post("/user/login", async (ctx, next) => {
     const { user, pwd } = ctx.request.body;
     await userModel.findOne({ user, pwd }, function(e, doc) {
@@ -74,9 +74,7 @@ module.exports = function(router) {
   });
 
   router.post("/user/info", async (ctx, next) => {
-    
-    console.log("1...1")
-    console.log(ctx.request.decoded);
+  
     const { id } = ctx.request.decoded;
     await userModel.findOne({ _id: id }, function(e, doc) {
       if (!doc) {
@@ -104,9 +102,9 @@ module.exports = function(router) {
         data: {
           user,
           type,
-          _id
+          id:_id
         }
       };
     });
   });
-};
+}

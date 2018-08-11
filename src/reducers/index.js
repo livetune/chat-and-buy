@@ -1,10 +1,12 @@
 import { combineReducers } from "redux-immutable";
 import userReducer from "./user";
+import chatReducer from "./chat";
 import { LOG_OUT } from "../actions/type";
 import history from "../common/history";
 
 const appReducer = combineReducers({
-  user: userReducer
+  user: userReducer,
+  chat:chatReducer
 });
 
 const rootReducer = (state, action) => {

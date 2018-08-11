@@ -1,10 +1,7 @@
-const user = require("./user");
-
-
+import user from "./user";
+import chat from "./chat";
 module.exports = function(router) {
-  [
-    user
-  ].forEach((p) => {
+  [user, chat].forEach(p => {
     p(router);
-  })
-}
+  });
+};

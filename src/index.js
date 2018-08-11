@@ -8,7 +8,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import configureStore from "./store/configureStore";
 import "./common/axiosMiddleware";
 import "fastclick";
-
+import "./styles/index.scss";
 const store = configureStore();
 
 function render(Component) {

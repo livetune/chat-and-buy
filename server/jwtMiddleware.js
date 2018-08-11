@@ -7,7 +7,6 @@ export default function(options = {}) {
       await next();
       return;
     }
-
     const token =
       ctx.request.body.token ||
       ctx.query.token ||
@@ -17,6 +16,7 @@ export default function(options = {}) {
         let res = await jwt.verify(token, key);
         ctx.request.decoded = res;
         await next();
+        console.log("toen")
       } catch (error) {
         ctx.status = 401;
         ctx.body = {

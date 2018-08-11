@@ -1,0 +1,48 @@
+.dashBoard-wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.bottom-input {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.chat-list-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  .circle {
+    background: greenyellow;
+    flex: 0 0 40px;
+    line-height: 40px;
+    margin: 0 10px;
+    border-radius: 50%;
+    text-align: center;
+  }
+  .message {
+    margin-right: 10px;
+  }
+  &.reverse {
+    flex-direction: row-reverse;
+    .message {
+      margin-right: 0;
+      margin-left: 10px;
+    }
+  }
+}

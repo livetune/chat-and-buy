@@ -21,7 +21,8 @@ router.get("/", (ctx, next) => {
 
 require("./router")(router);
 const server = require("http").Server(app.callback());
-
+const io = global.io = require("socket.io")(server);
+require("./socket")(io);
 server.listen(config.PROT, function() {
   console.log("node start");
 });

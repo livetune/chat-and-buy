@@ -3,6 +3,7 @@ import { LOGIN, LOG_OUT, REGISTER, GET_INFO } from "./type";
 import { Toast } from "antd-mobile";
 import axios from "axios";
 import history from "../common/history";
+import { connectSocket } from "./chat";
 
 function setToken(token) {
   window.localStorage.setItem("token", token);
@@ -35,11 +36,11 @@ export function login({ user, pwd }) {
 export function getInfo() {
   return async dispatch => {
     try {
-      const res = await axios.post("user/info");
+      const res = await axios.post("/user/info");
       if (res.status === 200 && res.data.code === 0) {
         dispatch({type:GET_INFO,payload:res.data.data});
-      
-      }
+        dispatch(connectSocket());
+      } 
     } catch (e) {
       console.log(e);
     }
