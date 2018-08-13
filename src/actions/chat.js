@@ -12,14 +12,24 @@ import history from "../common/history";
 import { Toast } from "antd-mobile";
 import io from "socket.io-client";
 import { filterNoReadCount } from "../common/unit";
+import { affirmOrderSuccess, getOrderSuccess } from "./order";
 
 let socket = "";
 
 export function connectSocket() {
   return (dispatch, state) => {
-    socket = io("http://localhost:3001");
+    const orders = state()
+      .get("user")
+      .get("orders");
+    console.log("order..",state().get("user"))
+    socket = io("http://192.168.1.108:3001");
     socket.on("connect", () => {
-      socket.emit("user", state().get("user").get("id"));
+      socket.emit(
+        "user",
+        state()
+          .get("user")
+          .get("id")
+      );
       // socket.emit("sendMessage", { from: state().get("user").get("id"), to:"5b607ea0fd5d57e83805fda2", message:"hello" });
     });
 
@@ -28,6 +38,20 @@ export function connectSocket() {
         dispatch({ type: GET_USERNAME, payload: userName });
       } else {
         history.push("/messageList");
+      }
+    });
+    socket.on("affirmOrder", id => {
+      console.log(id)
+      if (!orders.isEmpty()) {
+        dispatch(affirmOrderSuccess(id));
+      }
+    });
+
+    socket.on("getOrder", data => {
+      
+      console.log(orders.isEmpty())
+      if (!orders.isEmpty()) {
+        dispatch(getOrderSuccess(data));
       }
     });
 
@@ -71,8 +95,7 @@ export function getMessageList() {
     try {
       const res = await axios.post("/chat/getMessageList");
 
-      if (res.status === 200 && res.data.code ===0) {
-        
+      if (res.status === 200 && res.data.code === 0) {
         const id = state()
           .get("user")
           .get("id");
@@ -102,7 +125,9 @@ export function setCurrentChatList(obj, messageId) {
 
 export function sendMessage(to, message) {
   return (dispatch, state) => {
-    const id = state().get("user").get("id");
+    const id = state()
+      .get("user")
+      .get("id");
     const payload = {
       from: id,
       to,

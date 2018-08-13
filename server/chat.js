@@ -16,7 +16,6 @@ export default function(router) {
         msg: "服务器出错"
       };
     }
-    
   });
 
   router.post("/chat/cleanNoRead", async (ctx, next) => {
@@ -24,14 +23,14 @@ export default function(router) {
     const { messageId, readId } = ctx.request.body;
     try {
       let res = await Chat.findOneAndUpdate(
-        { "BothSide.user": id, messageId },
-        { set: { "bothSide.$.lastId": readId } }
+        { "bothSide.user": id, messageId },
+        { $set: { "bothSide.$.lastId": readId } }
       );
       ctx.body = {
         code: 0
       };
     } catch (e) {
-      console.log(e)
+      console.log(e);
       ctx.status = 500;
       ctx.body = {
         msg: "服务器出错"

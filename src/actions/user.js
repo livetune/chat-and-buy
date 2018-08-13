@@ -1,10 +1,9 @@
-// import { REGISTER, LOG_OUT, LOGIN, GET_INFO, GET_MY_ORDERS } from "./types";
-import { LOGIN, LOG_OUT, REGISTER, GET_INFO } from "./type";
+import { LOGIN, LOG_OUT, REGISTER, GET_INFO, GET_MY_ORDERS } from "./type";
 import { Toast } from "antd-mobile";
 import axios from "axios";
 import history from "../common/history";
 import { connectSocket } from "./chat";
-
+import { fromJS } from "immutable";
 function setToken(token) {
   window.localStorage.setItem("token", token);
   history.push("/");
@@ -23,7 +22,7 @@ export function login({ user, pwd }) {
         const res = await axios.post("/user/login", { user, pwd });
         if (res.status === 200 && res.data.code === 0) {
           dispatch({ type: LOGIN, payload: res.data.data });
-          console.log(res.data.token)
+          console.log(res.data.token);
           setToken(res.data.token);
         }
       } catch (error) {
@@ -38,9 +37,9 @@ export function getInfo() {
     try {
       const res = await axios.post("/user/info");
       if (res.status === 200 && res.data.code === 0) {
-        dispatch({type:GET_INFO,payload:res.data.data});
+        dispatch({ type: GET_INFO, payload: res.data.data });
         dispatch(connectSocket());
-      } 
+      }
     } catch (e) {
       console.log(e);
     }
@@ -50,7 +49,7 @@ export function getInfo() {
 export function register({ user, type, pwd }) {
   return async dispatch => {
     if (!user || !pwd || !type) {
-      Toast.faul("请输入账号密码");
+      Toast.fail("请输入账号密码");
     } else {
       try {
         const res = await axios.post("/user/register", { user, type, pwd });
@@ -61,6 +60,19 @@ export function register({ user, type, pwd }) {
       } catch (e) {
         console.log(e);
       }
+    }
+  };
+}
+
+export function getMyOrders() {
+  return async dispatch => {
+    try {
+      let res = await axios.post("/user/orders");
+      if ((res.status === 200) & (res.data.code === 0)) {
+        dispatch({ type: GET_MY_ORDERS, payload: fromJS(res.data.data) });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 }

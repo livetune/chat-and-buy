@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { List, Stepper } from "antd-mobile";
 import ImmutablePropsType from "react-immutable-proptypes";
 import PropTypes from "prop-types";
@@ -39,3 +39,11 @@ const GoodsList = ({ goodsList, addToCart, shopCart }) => {
     </List>
   );
 };
+
+GoodsList.propTypes = {
+  goodsList: ImmutablePropsType.list.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  shopCart: ImmutablePropsType.list.isRequired
+};
+
+export default GoodsList;

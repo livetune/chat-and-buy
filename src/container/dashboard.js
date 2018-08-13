@@ -7,16 +7,18 @@ import { connectSocket, getMessageList, sendMessage } from "../actions/chat";
 import asyncComponent from "../asyncComponent";
 const Message = asyncComponent(() => import("./message"));
 const Goods = asyncComponent(() => import("./goods"));
-const My = asyncComponent(() => import("./my"));
+const AllOrders = asyncComponent(() => import("./allOrders"));
+// const My = asyncComponent(() => import("./my"));
+const My = asyncComponent(() => import("./myOrder"));
 const Chat = asyncComponent(() => import("./chat"));
 const list = [
-  // {
-  //   title: "订单",
-  //   path: "/allOrders",
-  //   type: "customer",
-  //   component: "",
-  //   imgName: "order"
-  // },
+  {
+    title: "订单",
+    path: "/allOrders",
+    type: "customer",
+    component: AllOrders,
+    imgName: "order"
+  },
   {
     title: "商品",
     path: "/goods",
@@ -64,7 +66,7 @@ class DashBoard extends React.Component {
     }
     this.props.getMessageList();
   }
-  
+
   render() {
     const { user, location, history, noReadCount } = this.props;
     const type = user.get("type");

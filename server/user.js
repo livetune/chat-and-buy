@@ -7,7 +7,6 @@ export default function(router) {
     const { user, pwd } = ctx.request.body;
     await userModel.findOne({ user, pwd }, function(e, doc) {
       if (!doc) {
-        console.log(doc);
         ctx.status = 200;
         ctx.body = {
           msg: "登录失败，用户名密码不匹配",
@@ -74,11 +73,9 @@ export default function(router) {
   });
 
   router.post("/user/info", async (ctx, next) => {
-  
     const { id } = ctx.request.decoded;
     await userModel.findOne({ _id: id }, function(e, doc) {
       if (!doc) {
-        console.log(doc);
         ctx.status = 401;
         ctx.body = {
           msg: "登录失败，token失效"
@@ -102,9 +99,36 @@ export default function(router) {
         data: {
           user,
           type,
-          id:_id
+          id: _id
         }
       };
     });
+  });
+
+  router.post("/user/orders", async ctx => {
+    const { id } = ctx.request.decoded;
+
+    try {
+      let res = await userModel
+        .findOne({ _id: id })
+        .populate({ path: "orders", options: { sort: { date: -1 } } });
+      if (!res) {
+        ctx.body = {
+          code: 1,
+          msg: "找不到该用户"
+        };
+        return;
+      }
+      ctx.body = {
+        code: 0,
+        data: res.orders
+      };
+    } catch (e) {
+      ctx.status = 500;
+      ctx.body = {
+        code: 1,
+        msg: "服务器出错了"
+      };
+    }
   });
 }

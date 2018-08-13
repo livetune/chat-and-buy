@@ -74,7 +74,6 @@ class Chat extends Component {
   render() {
     const { chat, history } = this.props;
     const userName = chat.get("userName");
-
     return (
       <div>
         {!!userName && <NavBar title={userName} backClick={history.goBack} />}

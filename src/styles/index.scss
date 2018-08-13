@@ -1,3 +1,7 @@
+span.am-stepper-handler {
+  touch-action: none
+}
+
 .dashBoard-wrapper {
   position: fixed;
   left: 0;
@@ -11,6 +15,7 @@
   top: 0;
   left: 0;
   right: 0;
+  z-index: 100;
 }
 
 .bottom-input {
@@ -45,4 +50,42 @@
       margin-left: 10px;
     }
   }
+}
+
+.goods-list {
+  margin-top: 45px;
+  margin-bottom: 100px;
+}
+
+.buy-warpper {
+  position: fixed;
+  display: flex;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  height: 50px;
+  z-index: 100;
+  .price {
+    flex: 1;
+    background: rgb(83, 78, 78);
+    color: #fff;
+    line-height: 50px;
+    padding-left: 15px;
+  }
+  .buy-button,
+  .no-buy-button {
+    width: 130px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+  }
+  .buy-button {
+    background: rgb(26, 236, 131);
+  }
+
+  .no-buy-button {
+    background: rgb(93, 103, 114);
+    color: darkgrey;
+  }
+
 }
