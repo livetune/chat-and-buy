@@ -21,7 +21,7 @@ export function connectSocket() {
     const orders = state()
       .get("user")
       .get("orders");
-    console.log("order..",state().get("user"))
+      
     socket = io("http://192.168.1.108:3001");
     socket.on("connect", () => {
       socket.emit(
