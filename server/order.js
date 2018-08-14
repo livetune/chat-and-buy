@@ -39,7 +39,7 @@ export default function(router) {
         };
         return;
       }
-      let userData = await User.update(
+      await User.update(
         { _id: id },
         {
           $push: {

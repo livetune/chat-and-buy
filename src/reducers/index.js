@@ -15,7 +15,7 @@ const appReducer = combineReducers({
 
 const rootReducer = (state, action) => {
   if (action.type === LOG_OUT) {
-    history.push("./register");
+    history.push("./login");
     window.localStorage.clear();
     state = undefined;
   }
