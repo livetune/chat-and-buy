@@ -72,12 +72,12 @@ class DashBoard extends React.Component {
     const type = user.get("type");
     const path = user.get("path");
 
-    if (!user.get("type")) {
-      this.props.getInfo();
-      return null;
-    } else {
-      connectSocket();
-    }
+    // if (!user.get("type")) {
+    //   this.props.getInfo();
+    //   return null;
+    // } else {
+    //   connectSocket();
+    // }
 
     if (!type) {
       return null;
