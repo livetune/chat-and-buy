@@ -1,4 +1,9 @@
 ## 项目运行（nodejs 6.0+）
+
+### 演示网站
+
+[http://chat.livetune.xyz:3000](http://chat.livetune.xyz:3000)
+
 ``` bash
 # 克隆到本地
 git clone https://github.com/livetune/chat-and-buy.git
