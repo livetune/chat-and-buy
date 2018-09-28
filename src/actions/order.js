@@ -8,7 +8,7 @@ import { fromJS } from "immutable";
 export function getAllOrders() {
   return async dispatch => {
     try {
-      let res = await axios.get("/order/allOrders");
+      let res = await axios.get("/api/order/allOrders");
       if (res.status === 200 && res.data.code === 0) {
         dispatch({ type: GET_ALL_ORDERS, payload: fromJS(res.data.data) });
       }
@@ -29,7 +29,7 @@ export function affirmOrderSuccess(id) {
 export function getOrder(orderId) {
   return async dispatch => {
     try {
-      let res = await axios.post("/order/getOrder", { orderId });
+      let res = await axios.post("/api/order/getOrder", { orderId });
       if (res.status === 200 && res.data.code===0) {
         history.push("/me");
         Toast.success("接单成功", 1);
@@ -43,7 +43,7 @@ export function getOrder(orderId) {
 export function affirmOrder(orderId) {
   return async dispatch => {
     try {
-      let res = await axios.post("/order/affirm", { orderId });
+      let res = await axios.post("/api/order/affirm", { orderId });
       if (res.status === 200 && res.data.code===0) {
         Toast.success("确认订单成功", 1);
         dispatch(affirmOrderSuccess(orderId));

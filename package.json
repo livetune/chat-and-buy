@@ -139,7 +139,15 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:3001",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": "/"
+      }
+    }
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0"
   }

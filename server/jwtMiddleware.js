@@ -3,6 +3,7 @@ import key from "./key";
 
 export default function(options = {}) {
   return async (ctx, next) => {
+    console.log(ctx.url)
     if (ctx.url === "/user/login" || ctx.url === "/user/register") {
       await next();
       return;

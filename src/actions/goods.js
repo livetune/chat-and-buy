@@ -6,7 +6,7 @@ import { fromJS } from "immutable";
 export function getGoodsInfo() {
   return async dispatch => {
     try {
-      let res = await axios.get("/goods/list");
+      let res = await axios.get("/api/goods/list");
       if (res.status === 200 && res.data.code === 0) {
         return dispatch({ type: GOODS_LIST, payload: fromJS(res.data.data) });
       }
@@ -28,7 +28,7 @@ export function addToCart({ id, price, count }) {
 export function buy() {
   return async (dispatch, state) => {
     try {
-      let res = await axios.post("/goods/buy", {
+      let res = await axios.post("/api/goods/buy", {
         buyList: state()
           .get("goods")
           .get("shopCart")

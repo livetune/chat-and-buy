@@ -2,7 +2,7 @@
 
 ### 演示网站
 
-[http://chat.livetune.xyz:3000](http://chat.livetune.xyz:3000)
+[http://chat.livetune.xyz](http://chat.livetune.xyz)
 
 ``` bash
 # 克隆到本地

@@ -19,7 +19,7 @@ export function login({ user, pwd }) {
       Toast.fail("请输入账号密码");
     } else {
       try {
-        const res = await axios.post("/user/login", { user, pwd });
+        const res = await axios.post("/api/user/login", { user, pwd });
         if (res.status === 200 && res.data.code === 0) {
           dispatch({ type: LOGIN, payload: res.data.data });
           console.log(res.data.token);
@@ -35,7 +35,7 @@ export function login({ user, pwd }) {
 export function getInfo() {
   return async dispatch => {
     try {
-      const res = await axios.post("/user/info");
+      const res = await axios.post("/api/user/info");
       if (res.status === 200 && res.data.code === 0) {
         dispatch({ type: GET_INFO, payload: res.data.data });
         dispatch(connectSocket());
@@ -52,7 +52,7 @@ export function register({ user, type, pwd }) {
       Toast.fail("请输入账号密码");
     } else {
       try {
-        const res = await axios.post("/user/register", { user, type, pwd });
+        const res = await axios.post("/api/user/register", { user, type, pwd });
         if (res.status === 200 && res.data.code === 0) {
           dispatch({ type: REGISTER, payload: res.data.data });
           setToken(res.data.token);
@@ -67,7 +67,7 @@ export function register({ user, type, pwd }) {
 export function getMyOrders() {
   return async dispatch => {
     try {
-      let res = await axios.post("/user/orders");
+      let res = await axios.post("/api/user/orders");
       if ((res.status === 200) & (res.data.code === 0)) {
         dispatch({ type: GET_MY_ORDERS, payload: fromJS(res.data.data) });
       }

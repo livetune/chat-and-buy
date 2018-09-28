@@ -1,40 +1,40 @@
-import model from "./model";
-const Chat = model.chat;
+import model from './model'
+const Chat = model.chat
 
 export default function(router) {
-  router.post("/chat/getMessageList", async (ctx, next) => {
-    const { id } = ctx.request.decoded;
+  router.post('/chat/getMessageList', async (ctx, next) => {
+    const { id } = ctx.request.decoded
     try {
-      let chatData = await Chat.find({ messageId: { $regex: id } });
+      let chatData = await Chat.find({ messageId: { $regex: id } })
       ctx.body = {
         code: 0,
         data: chatData
-      };
+      }
     } catch (e) {
-      ctx.status = 500;
+      ctx.status = 500
       ctx.body = {
-        msg: "服务器出错"
-      };
+        msg: '服务器出错'
+      }
     }
-  });
+  })
 
-  router.post("/chat/cleanNoRead", async (ctx, next) => {
-    const { id } = ctx.request.decoded;
-    const { messageId, readId } = ctx.request.body;
+  router.post('/chat/cleanNoRead', async (ctx, next) => {
+    const { id } = ctx.request.decoded
+    const { messageId, readId } = ctx.request.body
     try {
-      let res = await Chat.findOneAndUpdate(
-        { "bothSide.user": id, messageId },
-        { $set: { "bothSide.$.lastId": readId } }
-      );
+      await Chat.findOneAndUpdate(
+        { 'bothSide.user': id, messageId },
+        { $set: { 'bothSide.$.lastId': readId } }
+      )
       ctx.body = {
         code: 0
-      };
+      }
     } catch (e) {
-      console.log(e);
-      ctx.status = 500;
+      console.log(e)
+      ctx.status = 500
       ctx.body = {
-        msg: "服务器出错"
-      };
+        msg: '服务器出错'
+      }
     }
-  });
+  })
 }
