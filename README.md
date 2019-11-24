@@ -2,7 +2,7 @@
 
 ### 演示网站
 
-[http://chat.livetune.xyz](http://chat.livetune.xyz)
+[http://chat.livetune.xyz(网站已过期，有空了再买个新的服务器。)](http://chat.livetune.xyz)
 
 ``` bash
 # 克隆到本地
